@@ -58,3 +58,27 @@ function gameOfLife(grid) {
 
   return grid;
 }
+
+// working on 1d first
+
+function nextGen1D(cells) {
+  const test = [];
+  cells.forEach((x, i) => {
+    let neighbours = 0;
+    if (cells[i - 1] === 1) neighbours++;
+    if (cells[i + 1] === 1) neighbours++;
+    if (x === 1) {
+      if (neighbours === 1) {
+        test.push(1);
+      } else {
+        test.push(0);
+      }
+    } else if (x === 0) {
+      if (neighbours === 2) {
+        test.push(1);
+      } else {
+        test.push(0);
+      }
+    }
+  });
+}
