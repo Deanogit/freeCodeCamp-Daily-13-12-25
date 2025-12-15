@@ -28,9 +28,13 @@
 
 function gameOfLife(grid) {
   console.log(grid);
+  const rows = grid.length;
+  const cols = grid[0].length;
   const result = [];
-  for (let row = 0; row < grid.length; row++) {
-    for (let col = 0; col < grid[row].length; col++) {
+  for (let row = 0; row < rows; row++) {
+    const resultRow = [];
+    for (let col = 0; col < cols; col++) {
+      const resultCol = [];
       let neighbours = 0;
       const locations = [
         [-1, -1],
@@ -53,10 +57,31 @@ function gameOfLife(grid) {
           neighbours++;
         }
       }
+
+      const cell = grid[row][col];
+      let nextCell = 0;
+
+      // Apply game of life rules
+      if (cell === 1) {
+        if (neighbours < 2 || neighbours > 3) {
+          nextCell = 0; // dies
+        } else {
+          nextCell = 1; // lives
+        }
+      } else {
+        if (neighbours === 3) {
+          nextCell = 1; // becomes alive
+        } else {
+          nextCell = 0; // stays dead
+        }
+      }
+
+      resultRow.push(nextCell);
     }
+    result.push(resultRow);
   }
 
-  return grid;
+  return result;
 }
 
 // working on 1d first
